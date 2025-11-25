@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnapMarket - The Ultimate Snapchat Resource</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom Font for Urdu (Jameel Noori) - Ensure file is present */
+        @font-face {
+            font-family: 'Jameel Noori Nastaleeq';
+            src: url('JameelNooriNastaleeq.ttf') format('truetype');
+        }
+
+        body {
+            /* Main body black for contrast */
+            background-color: #000000; 
+            background-attachment: fixed;
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+        }
+
+        /* FOGY GLASS Effect Class for Cards/Elements */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Darker Glass Nav */
+        .glass-nav {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Custom Gradient for Each Section (Black to Deep Gold) */
+        .section-gradient {
+            background: linear-gradient(to bottom, #111111, #1a1a1a, #2b2400); 
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.1); 
+        }
+        
+        /* Gradient Text for Headings (Golden Highlight) */
+        .gradient-heading {
+            background: linear-gradient(to right, #FFD700, #FFFFFF, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        /* Language Specific Fonts */
+        .font-urdu {
+            font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
+            line-height: 1.8;
+        }
+        .font-arabic {
+            font-family: 'Cairo', sans-serif;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body class="text-white flex flex-col pt-20" id="body-container">
+
+    <nav class="glass-nav fixed w-full z-50 top-0 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#" class="text-2xl font-bold text-yellow-400 flex items-center gap-2">
+                <i class="fab fa-snapchat"></i> <span id="brand-logo">SnapMarket</span>
+            </a>
+
+            <div id="nav-links" class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-item hover:text-yellow-400 transition">Home</a>
+                <a href="#about" class="nav-item hover:text-yellow-400 transition">Why Choose Us?</a>
+                <a href="#services" class="nav-item hover:text-yellow-400 transition">Service</a>
+                <a href="#achievement" class="nav-item hover:text-yellow-400 transition">Achievement</a>
+                <a href="#we-offer" class="nav-item hover:text-yellow-400 transition">Offerings</a>
+                <a href="#tools" class="nav-item hover:text-yellow-400 transition">Tools</a>
+                <a href="#learning" class="nav-item hover:text-yellow-400 transition">Learning</a>
+            </div>
+
+            <div class="relative group">
+                <button class="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full hover:bg-white/20 transition backdrop-blur-md border border-white/10">
+                    <i class="fas fa-globe"></i> <span id="current-lang">Language</span>
+                </button>
+                <div class="absolute right-0 mt-2 w-40 bg-gray-900/90 backdrop-blur-xl rounded-xl shadow-xl hidden group-hover:block border border-gray-700 overflow-hidden">
+                    <a href="#" onclick="changeLang('en')" class="lang-option block px-4 py-2 hover:bg-yellow-500 hover:text-black">English</a>
+                    <a href="#" onclick="changeLang('ur')" class="lang-option block px-4 py-2 hover:bg-yellow-500 hover:text-black font-urdu text-right">اردو</a>
+                    <a href="#" onclick="changeLang('ar')" class="lang-option block px-4 py-2 hover:bg-yellow-500 hover:text-black font-arabic text-right">العربية</a>
+                    <a href="#" onclick="changeLang('fr')" class="lang-option block px-4 py-2 hover:bg-yellow-500 hover:text-black">Français</a>
+                    <a href="#" onclick="changeLang('es')" class="lang-option block px-4 py-2 hover:bg-yellow-500 hover:text-black">Español</a>
+                    <a href="#" onclick="changeLang('de')" class="lang-option block px-4 py-2 hover:bg-yellow-500 hover:text-black">Deutsch</a>
+                    <a href="#" onclick="changeLang('ph')" class="lang-option block px-4 py-2 hover:bg-yellow-500 hover:text-black">Tagalog</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow">
+        <section id="home" class="relative pt-10 pb-20 px-6 text-center section-gradient">
+            <div class="glass max-w-4xl mx-auto p-10 rounded-3xl">
+                <h1 id="hero-title" class="text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg">
+                    Dominate Your <span class="text-yellow-400">Snapchat Presence</span>
+                </h1>
+                <p id="hero-desc" class="text-lg md:text-xl text-gray-300 mb-8">
+                    The ultimate platform for high-score accounts, boosting services, and cutting-edge AR Lens Creation.
+                </p>
+                <a href="#services" id="hero-btn" class="inline-block bg-yellow-400 text-black font-bold py-3 px-8 rounded-full text-lg hover:bg-yellow-300 hover:scale-105 transition transform shadow-lg">
+                    Get Started <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </section>
+
+        <section id="about" class="container mx-auto px-6 py-16 section-gradient">
+            <h2 id="why-choose-title" class="text-3xl font-bold text-center mb-10 gradient-heading">Why Choose Us?</h2>
+            <div class="glass grid grid-cols-1 md:grid-cols-3 gap-8 p-8 rounded-2xl">
+                <div class="text-center p-4">
+                    <i class="fas fa-award text-4xl text-yellow-500 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Verified Trust</h3>
+                    <p class="text-gray-400 text-sm">Hundreds of satisfied clients globally. Your safety is our priority.</p>
+                </div>
+                <div class="text-center p-4">
+                    <i class="fas fa-bolt text-4xl text-yellow-500 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Instant Delivery</h3>
+                    <p class="text-gray-400 text-sm">Accounts and boosting services are delivered quickly and efficiently.</p>
+                </div>
+                <div class="text-center p-4">
+                    <i class="fas fa-magic text-4xl text-yellow-500 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">AR Innovation</h3>
+                    <p class="text-gray-400 text-sm">We don't just sell, we create unique Snapchat AR experiences.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="container mx-auto px-6 py-16 section-gradient">
+            <h2 id="services-title" class="text-3xl font-bold text-center mb-10 gradient-heading">Our Professional Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass p-8 rounded-2xl flex flex-col hover:bg-white/10 transition">
+                    <i class="fas fa-id-card text-4xl text-yellow-500 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">High Score Accounts</h3>
+                    <p class="text-gray-400 mb-4 text-sm flex-grow">Aged, high-score Snapchat accounts (50k+ to 200k+) for instant social proof.</p>
+                    <button onclick="orderNow('High Score Account', 'Varies')" class="bg-yellow-400 text-black px-4 py-2 rounded-full font-bold mt-auto hover:bg-yellow-300"><i class="fab fa-whatsapp"></i> Order</button>
+                </div>
+                <div class="glass p-8 rounded-2xl flex flex-col hover:bg-white/10 transition">
+                    <i class="fas fa-level-up-alt text-4xl text-blue-500 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Snap Score Boosting</h3>
+                    <p class="text-gray-400 mb-4 text-sm flex-grow">Safely boost your existing account score by 10k to 50k points quickly.</p>
+                    <button onclick="orderNow('Score Boosting Service', 'Varies')" class="bg-blue-500 text-white px-4 py-2 rounded-full font-bold mt-auto hover:bg-blue-600"><i class="fab fa-whatsapp"></i> Order</button>
+                </div>
+                <div class="glass p-8 rounded-2xl flex flex-col hover:bg-white/10 transition">
+                    <i class="fas fa-camera-retro text-4xl text-purple-500 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Snapchat AR Lens Creation</h3>
+                    <p class="text-gray-400 mb-4 text-sm flex-grow">Custom-designed AR Lenses for brands, events, or personal use via Lens Studio.</p>
+                    <button onclick="orderNow('AR Lens Creation', 'Varies')" class="bg-purple-500 text-white px-4 py-2 rounded-full font-bold mt-auto hover:bg-purple-600"><i class="fab fa-whatsapp"></i> Get Quote</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="achievement" class="container mx-auto px-6 py-16 text-center section-gradient">
+            <h2 id="achievement-title" class="text-3xl font-bold text-center mb-10 gradient-heading">Our Achievements</h2>
+            <div class="glass p-10 rounded-2xl grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <p class="text-4xl font-bold text-yellow-400">500+</p>
+                    <p class="text-gray-400 mt-2 text-sm">Accounts Sold</p>
+                </div>
+                <div>
+                    <p class="text-4xl font-bold text-yellow-400">1M+</p>
+                    <p class="text-gray-400 mt-2 text-sm">Score Boosted</p>
+                </div>
+                <div>
+                    <p class="text-4xl font-bold text-yellow-400">15+</p>
+                    <p class="text-gray-400 mt-2 text-sm">AR Lenses Published</p>
+                </div>
+                <div>
+                    <p class="text-4xl font-bold text-yellow-400">98%</p>
+                    <p class="text-gray-400 mt-2 text-sm">Client Satisfaction</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="we-offer" class="container mx-auto px-6 py-16 section-gradient">
+            <h2 id="we-offer-title" class="text-3xl font-bold text-center mb-10 gradient-heading">What We Offer</h2>
+            <div class="glass p-8 rounded-2xl text-center">
+                <i class="fas fa-hand-holding-heart text-5xl text-yellow-400 mb-4"></i>
+                <p class="text-lg text-gray-300">We offer **complete Snapchat solutions**, from secure account boosting and high-quality aged accounts to bespoke **Augmented Reality Lens creation** for businesses and influencers. Our priority is providing reliable, fast, and safe digital assets and services.</p>
+                <button onclick="orderNow('General Inquiry', 'N/A')" class="mt-6 bg-yellow-400 text-black px-6 py-2 rounded-full font-bold hover:bg-yellow-300 transition">Explore Services</button>
+            </div>
+        </section>
+
+        <section id="tools" class="container mx-auto px-6 py-16 section-gradient">
+            <h2 id="tools-title" class="text-3xl font-bold text-center mb-10 gradient-heading">Tools</h2>
+            
+            <div class="glass p-8 rounded-2xl">
+                <h3 class="text-2xl font-bold mb-5 text-yellow-400 flex items-center"><i class="fas fa-toolbox mr-3"></i> Utility Tools (Free/Paid)</h3>
+                <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-lg">
+                    <li class="flex flex-col items-center justify-center p-6 glass rounded-xl border border-white/10 hover:bg-white/5 transition duration-300 shadow-md">
+                        <i class="fas fa-download text-3xl text-green-400 mb-2"></i> 
+                        <span class="text-center">Stories Downloader</span>
+                    </li>
+                    <li class="flex flex-col items-center justify-center p-6 glass rounded-xl border border-white/10 hover:bg-white/5 transition duration-300 shadow-md">
+                        <i class="fas fa-video text-3xl text-green-400 mb-2"></i>
+                        <span class="text-center">Spotlight Downloader</span>
+                    </li>
+                    <li class="flex flex-col items-center justify-center p-6 glass rounded-xl border border-white/10 hover:bg-white/5 transition duration-300 shadow-md opacity-70">
+                        <i class="fas fa-rocket text-3xl text-green-400 mb-2"></i>
+                        <span class="text-center">Snapify Tools (coming soon)</span>
+                    </li>
+                    <li class="flex flex-col items-center justify-center p-6 glass rounded-xl border border-white/10 hover:bg-white/5 transition duration-300 shadow-md opacity-70">
+                        <i class="fas fa-robot text-3xl text-green-400 mb-2"></i>
+                        <span class="text-center">Meta AI Downloader (coming soon)</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="learning" class="container mx-auto px-6 py-16 section-gradient">
+            <h2 id="learning-title" class="text-3xl font-bold text-center mb-10 gradient-heading">Learning Source</h2>
+            
+            <div class="glass p-8 rounded-2xl">
+                <h3 class="text-2xl font-bold mb-5 text-yellow-400 flex items-center"><i class="fas fa-book mr-3"></i> Knowledge Base & Tutorials</h3>
+                <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-lg">
+                    <li class="flex flex-col items-center justify-center p-6 glass rounded-xl border border-white/10 hover:bg-white/5 transition duration-300 shadow-md">
+                        <i class="fas fa-pen-nib text-3xl text-blue-400 mb-2"></i>
+                        <span class="text-center">Learn Lens Studio</span>
+                    </li>
+                    <li class="flex flex-col items-center justify-center p-6 glass rounded-xl border border-white/10 hover:bg-white/5 transition duration-300 shadow-md">
+                        <i class="fas fa-lightbulb text-3xl text-blue-400 mb-2"></i>
+                        <span class="text-center">Snapchat Tips</span>
+                    </li>
+                    <li class="flex flex-col items-center justify-center p-6 glass rounded-xl border border-white/10 hover:bg-white/5 transition duration-300 shadow-md">
+                        <i class="fas fa-chart-line text-3xl text-blue-400 mb-2"></i>
+                        <span class="text-center">Growth Strategies</span>
+                    </li>
+                    <li class="flex flex-col items-center justify-center p-6 glass rounded-xl border border-white/10 hover:bg-white/5 transition duration-300 shadow-md">
+                        <i class="fas fa-code text-3xl text-blue-400 mb-2"></i>
+                        <span class="text-center">AR Tutorials</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="contact" class="container mx-auto px-6 py-16 text-center section-gradient">
+            <h2 id="contact-title" class="text-3xl font-bold text-center mb-10 gradient-heading">Get In Touch</h2>
+            <div class="flex justify-center space-x-8">
+                <a href="https://wa.me/923431390157" target="_blank" class="glass p-6 rounded-2xl hover:bg-white/20 transition flex flex-col items-center">
+                    <i class="fab fa-whatsapp text-6xl text-green-500 mb-3"></i>
+                    <span class="text-xl font-bold">WhatsApp Direct</span>
+                </a>
+                <a href="https://www.snapchat.com/add/neelammuneerpk" target="_blank" class="glass p-6 rounded-2xl hover:bg-white/20 transition flex flex-col items-center">
+                    <i class="fab fa-snapchat-ghost text-6xl text-yellow-400 mb-3"></i>
+                    <span class="text-xl font-bold">Snapchat Direct</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="glass-nav py-10 mt-16 border-t border-white/10">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <div class="flex flex-col items-start">
+                    <a href="#" class="text-3xl font-bold text-yellow-400 flex items-center mb-4">
+                        <i class="fab fa-snapchat"></i> SnapMarket
+                    </a>
+                    <div class="space-y-2 text-sm text-gray-400">
+                        <p class="font-bold text-white mb-2">Trust & Safety</p>
+                        <a href="#" class="hover:text-yellow-400 block">Privacy Policy</a>
+                        <a href="#" class="hover:text-yellow-400 block">Terms of Service</a>
+                        <a href="#" class="hover:text-yellow-400 block">Refund Policy</a>
+                    </div>
+                </div>
+
+                <div class="md:text-center">
+                    <p class="font-bold text-white text-lg mb-4">Contact Info</p>
+                    <div class="space-y-2 text-sm text-gray-400">
+                        <p><i class="fas fa-phone-alt mr-2 text-yellow-400"></i> +92 343 1390157</p>
+                        <p><i class="fas fa-envelope mr-2 text-yellow-400"></i> support@snapmarket.com</p>
+                        <p><i class="fas fa-map-marker-alt mr-2 text-yellow-400"></i> Lahore, Punjab, Pakistan</p>
+                    </div>
+                </div>
+
+                <div class="md:text-right">
+                    <p class="font-bold text-white text-lg mb-4">Information</p>
+                    <div class="space-y-2 text-sm text-gray-400">
+                        <a href="#about" class="hover:text-yellow-400 block">Our Vision</a>
+                        <a href="#achievement" class="hover:text-yellow-400 block">Success Stories</a>
+                        <a href="#contact" class="hover:text-yellow-400 block">Careers</a>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="pt-8 mt-8 border-t border-white/10 text-center text-gray-500 text-sm">
+                <p>Copyright © 2024 SnapMarket. All Rights Reserved.</p>
+                <p class="text-xs mt-1">Disclaimer: We are not affiliated with Snapchat Inc. or Snap Inc.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // WhatsApp Order Logic (Updated number: +923431390157)
+        function orderNow(item, price) {
+            const phoneNumber = "923431390157";
+            const message = `Hello, I want to order this service:\n\n📦 *Item:* ${item}\n💰 *Price:* ${price}\n\nPlease share payment details.`;
+            
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        // Language Data (COMPLETE Translations)
+        const translations = {
+            en: {
+                // Header (Updated Nav Links)
+                navAbout: 'Why Choose Us?', navService: 'Service', navAchieve: 'Achievement', navOffer: 'Offerings', navTools: 'Tools', navLearning: 'Learning',
+                // Hero
+                heroTitle: 'Dominate Your <span class="text-yellow-400">Snapchat Presence</span>',
+                heroDesc: 'The ultimate platform for high-score accounts, boosting services, and cutting-edge AR Lens Creation.',
+                heroBtn: 'Get Started',
+                // Sections
+                whyChooseTitle: 'Why Choose Us?',
+                servicesTitle: 'Our Professional Services',
+                achievementTitle: 'Our Achievements',
+                weOfferTitle: 'What We Offer',
+                toolsTitle: 'Tools',
+                learningTitle: 'Learning Source',
+                contactTitle: 'Get In Touch',
+                // Direction & Font
+                dir: 'ltr',
+                fontClass: ''
+            },
+            ur: {
+                // Header (Updated Nav Links)
+                navAbout: 'ہمیں کیوں منتخب کریں؟', navService: 'خدمات', navAchieve: 'کامیابیاں', navOffer: 'پیشکش', navTools: 'ٹولز', navLearning: 'سیکھنے کا ذریعہ',
+                // Hero
+                heroTitle: 'اپنی <span class="text-yellow-400">سنیپ چیٹ موجودگی</span> کو بہتر بنائیں',
+                heroDesc: 'ہائی اسکور اکاؤنٹس، بوسٹنگ سروسز، اور جدید AR لینس تخلیق کے لیے بہترین پلیٹ فارم۔',
+                heroBtn: 'شروع کریں',
+                // Sections
+                whyChooseTitle: 'ہمیں کیوں منتخب کریں؟',
+                servicesTitle: 'ہماری پیشہ ورانہ خدمات',
+                achievementTitle: 'ہماری کامیابیاں',
+                weOfferTitle: 'ہم کیا پیش کرتے ہیں',
+                toolsTitle: 'ٹولز',
+                learningTitle: 'سیکھنے کا ذریعہ',
+                contactTitle: 'رابطہ کریں',
+                // Direction & Font
+                dir: 'rtl',
+                fontClass: 'font-urdu'
+            },
+            ar: {
+                // Header (Updated Nav Links)
+                navAbout: 'لماذا تختارنا؟', navService: 'الخدمات', navAchieve: 'الإنجازات', navOffer: 'عروضنا', navTools: 'الأدوات', navLearning: 'مصدر التعلم',
+                // Hero
+                heroTitle: 'سيطر على <span class="text-yellow-400">تواجدك في سناب شات</span>',
+                heroDesc: 'المنصة المثالية لحسابات النقاط العالية، خدمات التعزيز، وإنشاء عدسات الواقع المعزز الحديثة.',
+                heroBtn: 'إبدأ الآن',
+                // Sections
+                whyChooseTitle: 'لماذا تختارنا؟',
+                servicesTitle: 'خدماتنا الاحترافية',
+                achievementTitle: 'إنجازاتنا',
+                weOfferTitle: 'ماذا نقدم؟',
+                toolsTitle: 'الأدوات',
+                learningTitle: 'مصدر التعلم',
+                contactTitle: 'تواصل معنا',
+                // Direction & Font
+                dir: 'rtl',
+                fontClass: 'font-arabic'
+            },
+            fr: {
+                // Header (Updated Nav Links)
+                navAbout: 'Pourquoi nous choisir?', navService: 'Service', navAchieve: 'Réalisations', navOffer: 'Nos Offres', navTools: 'Outils', navLearning: 'Apprentissage',
+                // Hero
+                heroTitle: 'Dominez votre <span class="text-yellow-400">Présence sur Snapchat</span>',
+                heroDesc: 'La plateforme ultime pour les comptes à score élevé, les services de boost et la création de Lenses AR de pointe.',
+                heroBtn: 'Commencer',
+                // Sections
+                whyChooseTitle: 'Pourquoi nous choisir?',
+                servicesTitle: 'Nos Services Professionnels',
+                achievementTitle: 'Nos Réalisations',
+                weOfferTitle: 'Ce que nous offrons',
+                toolsTitle: 'Outils',
+                learningTitle: 'Source d\'apprentissage',
+                contactTitle: 'Contactez-nous',
+                // Direction & Font
+                dir: 'ltr',
+                fontClass: ''
+            },
+            es: {
+                // Header (Updated Nav Links)
+                navAbout: '¿Por qué elegirnos?', navService: 'Servicio', navAchieve: 'Logros', navOffer: 'Lo que Ofrecemos', navTools: 'Herramientas', navLearning: 'Aprendizaje',
+                // Hero
+                heroTitle: 'Domina tu <span class="text-yellow-400">Presencia en Snapchat</span>',
+                heroDesc: 'La plataforma definitiva para cuentas de alta puntuación, servicios de boosting y creación de lentes AR de vanguardia.',
+                heroBtn: 'Empezar',
+                // Sections
+                whyChooseTitle: '¿Por qué elegirnos?',
+                servicesTitle: 'Nuestros Servicios Profesionales',
+                achievementTitle: 'Nuestros Logros',
+                weOfferTitle: 'Lo que Ofrecemos',
+                toolsTitle: 'Herramientas',
+                learningTitle: 'Fuente de Aprendizaje',
+                contactTitle: 'Ponte en Contacto',
+                // Direction & Font
+                dir: 'ltr',
+                fontClass: ''
+            },
+            de: {
+                // Header (Updated Nav Links)
+                navAbout: 'Warum uns wählen?', navService: 'Service', navAchieve: 'Erfolge', navOffer: 'Unsere Angebote', navTools: 'Werkzeuge', navLearning: 'Lernquelle',
+                // Hero
+                heroTitle: 'Dominieren Sie Ihre <span class="text-yellow-400">Snapchat-Präsenz</span>',
+                heroDesc: 'Die ultimative Plattform für High-Score-Konten, Boosting-Services und hochmoderne AR-Linsen-Erstellung.',
+                heroBtn: 'Jetzt starten',
+                // Sections
+                whyChooseTitle: 'Warum uns wählen?',
+                servicesTitle: 'Unsere Professionellen Dienstleistungen',
+                achievementTitle: 'Unsere Erfolge',
+                weOfferTitle: 'Was wir anbieten',
+                toolsTitle: 'Werkzeuge',
+                learningTitle: 'Lernquelle',
+                contactTitle: 'Kontaktieren Sie uns',
+                // Direction & Font
+                dir: 'ltr',
+                fontClass: ''
+            },
+            ph: {
+                // Header (Updated Nav Links)
+                navAbout: 'Bakit Kami Piliin?', navService: 'Serbisyo', navAchieve: 'Mga Tagumpay', navOffer: 'Ang Aming Alok', navTools: 'Mga Kagamitan', navLearning: 'Pag-aaral',
+                // Hero
+                heroTitle: 'Pangunahan ang iyong <span class="text-yellow-400">Snapchat Presence</span>',
+                heroDesc: 'Ang pinakahuling platform para sa high-score accounts, boosting services, at paggawa ng cutting-edge AR Lens.',
+                heroBtn: 'Magsimula',
+                // Sections
+                whyChooseTitle: 'Bakit Kami Piliin?',
+                servicesTitle: 'Ang Aming Propesyonal na Serbisyo',
+                achievementTitle: 'Ang Aming mga Tagumpay',
+                weOfferTitle: 'Ano ang Aming Alok',
+                toolsTitle: 'Mga Kagamitan',
+                learningTitle: 'Pinagmulan ng Pag-aaral',
+                contactTitle: 'Makipag-ugnayan',
+                // Direction & Font
+                dir: 'ltr',
+                fontClass: ''
+            }
+        };
+
+        // Language Switcher Function
+        function changeLang(lang) {
+            const t = translations[lang] || translations['en'];
+            
+            // Update Navigation Links
+            document.querySelector('#nav-links a[href="#about"]').innerText = t.navAbout;
+            document.querySelector('#nav-links a[href="#services"]').innerText = t.navService;
+            document.querySelector('#nav-links a[href="#achievement"]').innerText = t.navAchieve;
+            document.querySelector('#nav-links a[href="#we-offer"]').innerText = t.navOffer;
+            document.querySelector('#nav-links a[href="#tools"]').innerText = t.navTools;
+            document.querySelector('#nav-links a[href="#learning"]').innerText = t.navLearning;
+
+            // Update Hero
+            document.getElementById('hero-title').innerHTML = t.heroTitle;
+            document.getElementById('hero-desc').innerText = t.heroDesc;
+            document.getElementById('hero-btn').innerHTML = `${t.heroBtn} <i class="fas fa-arrow-right ml-2"></i>`;
+
+            // Update Section Titles
+            document.getElementById('why-choose-title').innerText = t.whyChooseTitle;
+            document.getElementById('services-title').innerText = t.servicesTitle;
+            document.getElementById('achievement-title').innerText = t.achievementTitle;
+            document.getElementById('we-offer-title').innerText = t.weOfferTitle;
+            document.getElementById('tools-title').innerText = t.toolsTitle;
+            document.getElementById('learning-title').innerText = t.learningTitle;
+            document.getElementById('contact-title').innerText = t.contactTitle;
+            document.getElementById('current-lang').innerText = lang.toUpperCase();
+
+            // Handle Direction (RTL/LTR) & Font
+            const body = document.getElementById('body-container');
+            body.style.direction = t.dir;
+            
+            // Remove existing language classes and add new one
+            body.classList.remove('font-urdu', 'font-arabic');
+            if (t.fontClass) {
+                body.classList.add(t.fontClass);
+            }
+        }
+    </script>
+</body>
+</html>

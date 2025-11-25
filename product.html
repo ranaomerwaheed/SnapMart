@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnapMarket - Products & Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom Font for Urdu (Jameel Noori) - Ensure file is present */
+        @font-face {
+            font-family: 'Jameel Noori Nastaleeq';
+            src: url('JameelNooriNastaleeq.ttf') format('truetype');
+        }
+
+        body {
+            background-color: #000000; 
+            background-attachment: fixed;
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+        }
+
+        /* FOGY GLASS Effect Class for Cards/Elements */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Darker Glass Nav */
+        .glass-nav {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Custom Gradient for Each Section (Black to Deep Gold) */
+        .section-gradient {
+            background: linear-gradient(to bottom, #111111, #1a1a1a, #2b2400); 
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.1); 
+        }
+        
+        /* Gradient Text for Headings (Golden Highlight) */
+        .gradient-heading {
+            background: linear-gradient(to right, #FFD700, #FFFFFF, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        /* Language Specific Fonts */
+        .font-urdu {
+            font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
+            line-height: 1.8;
+        }
+        .font-arabic {
+            font-family: 'Cairo', sans-serif;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body class="text-white flex flex-col pt-20" id="body-container">
+
+    <nav class="glass-nav fixed w-full z-50 top-0 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="text-2xl font-bold text-yellow-400 flex items-center gap-2">
+                <i class="fab fa-snapchat"></i> <span id="brand-logo">SnapMarket</span>
+            </a>
+
+            <div id="nav-links" class="hidden md:flex space-x-8">
+                <a href="index.html" class="nav-item hover:text-yellow-400 transition">Home</a>
+                <a href="#" class="nav-item text-yellow-400 transition">Products & Services</a> <a href="index.html#achievement" class="nav-item hover:text-yellow-400 transition">Achievement</a>
+                <a href="index.html#contact" class="nav-item hover:text-yellow-400 transition">Contact</a>
+            </div>
+
+            <div class="relative group">
+                <button class="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full hover:bg-white/20 transition backdrop-blur-md border border-white/10">
+                    <i class="fas fa-globe"></i> <span id="current-lang">Language</span>
+                </button>
+                <div class="absolute right-0 mt-2 w-40 bg-gray-900/90 backdrop-blur-xl rounded-xl shadow-xl hidden group-hover:block border border-gray-700 overflow-hidden">
+                    <a href="#" onclick="changeLang('en')" class="lang-option block px-4 py-2 hover:bg-yellow-500 hover:text-black">English</a>
+                    <a href="#" onclick="changeLang('ur')" class="lang-option block px-4 py-2 hover:bg-yellow-500 hover:text-black font-urdu text-right">اردو</a>
+                    <a href="#" onclick="changeLang('ar')" class="lang-option block px-4 py-2 hover:bg-yellow-500 hover:text-black font-arabic text-right">العربية</a>
+                    <a href="#" onclick="changeLang('fr')" class="lang-option block px-4 py-2 hover:bg-yellow-500 hover:text-black">Français</a>
+                    <a href="#" onclick="changeLang('es')" class="lang-option block px-4 py-2 hover:bg-yellow-500 hover:text-black">Español</a>
+                    <a href="#" onclick="changeLang('de')" class="lang-option block px-4 py-2 hover:bg-yellow-500 hover:text-black">Deutsch</a>
+                    <a href="#" onclick="changeLang('ph')" class="lang-option block px-4 py-2 hover:bg-yellow-500 hover:text-black">Tagalog</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow">
+        <section id="products-hero" class="relative pt-10 pb-20 px-6 text-center section-gradient">
+            <div class="glass max-w-4xl mx-auto p-10 rounded-3xl">
+                <h1 id="products-title" class="text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg">
+                    Browse Our <span class="text-yellow-400">Premium Offerings</span>
+                </h1>
+                <p id="products-desc" class="text-lg md:text-xl text-gray-300 mb-8">
+                    High-score accounts, boosting packages, and custom AR Lens development—everything you need for Snapchat success.
+                </p>
+                <a href="#accounts" id="view-accounts-btn" class="inline-block bg-yellow-400 text-black font-bold py-3 px-8 rounded-full text-lg hover:bg-yellow-300 hover:scale-105 transition transform shadow-lg">
+                    View Accounts <i class="fas fa-arrow-down ml-2"></i>
+                </a>
+            </div>
+        </section>
+
+    <section id="accounts" class="container mx-auto px-6 py-16 section-gradient">
+            <h2 id="accounts-heading" class="text-3xl font-bold text-center mb-10 gradient-heading">Snapchat Accounts for Sale</h2>
+            
+            <div class="mb-12">
+                <h3 class="text-2xl font-bold text-yellow-400 mb-6 border-b border-white/10 pb-2 flex items-center">
+                    <i class="fas fa-chart-line mr-3"></i> High Score Accounts
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <div class="glass p-6 rounded-2xl flex flex-col hover:bg-white/10 transition border-t-4 border-yellow-400">
+                        <i class="fas fa-star text-3xl text-yellow-500 mb-3"></i>
+                        <h4 class="text-lg font-bold mb-2">Starter Score (50K - 100K)</h4>
+                        <p class="text-gray-400 text-sm flex-grow">Aged account, ready for immediate use and professional representation.</p>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-xl font-extrabold text-yellow-400">From $XX</span>
+                            <button onclick="orderNow('Score Account: 50K-100K', 'From $XX')" class="bg-yellow-400 text-black px-3 py-1 rounded-full text-sm font-bold hover:bg-yellow-300">Buy</button>
+                        </div>
+                    </div>
+
+                    <div class="glass p-6 rounded-2xl flex flex-col hover:bg-white/10 transition border-t-4 border-yellow-400">
+                        <i class="fas fa-trophy text-3xl text-yellow-500 mb-3"></i>
+                        <h4 class="text-lg font-bold mb-2">Pro Score (100K - 250K)</h4>
+                        <p class="text-gray-400 text-sm flex-grow">High profile account, excellent for small business marketing and outreach.</p>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-xl font-extrabold text-yellow-400">From $YY</span>
+                            <button onclick="orderNow('Score Account: 100K-250K', 'From $YY')" class="bg-yellow-400 text-black px-3 py-1 rounded-full text-sm font-bold hover:bg-yellow-300">Buy</button>
+                        </div>
+                    </div>
+                    
+                    <div class="glass p-6 rounded-2xl flex flex-col hover:bg-white/10 transition border-t-4 border-yellow-400">
+                        <i class="fas fa-medal text-3xl text-yellow-500 mb-3"></i>
+                        <h4 class="text-lg font-bold mb-2">Elite Score (250K - 500K)</h4>
+                        <p class="text-gray-400 text-sm flex-grow">Premium status, instant social proof for serious brand building.</p>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-xl font-extrabold text-yellow-400">From $ZZ</span>
+                            <button onclick="orderNow('Score Account: 250K-500K', 'From $ZZ')" class="bg-yellow-400 text-black px-3 py-1 rounded-full text-sm font-bold hover:bg-yellow-300">Buy</button>
+                        </div>
+                    </div>
+
+                    <div class="glass p-6 rounded-2xl flex flex-col hover:bg-white/10 transition border-t-4 border-yellow-400">
+                        <i class="fas fa-bolt text-3xl text-yellow-500 mb-3"></i>
+                        <h4 class="text-lg font-bold mb-2">VIP Score (500K+ / Custom)</h4>
+                        <p class="text-gray-400 text-sm flex-grow">Request a custom score account tailored exactly to your high-end requirements.</p>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-xl font-extrabold text-yellow-400">Request Quote</span>
+                            <button onclick="orderNow('Score Account: 500K+ Custom', 'Quote')" class="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold hover:bg-red-600">Quote</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div>
+                <h3 class="text-2xl font-bold text-yellow-400 mb-6 border-b border-white/10 pb-2 flex items-center">
+                    <i class="fas fa-users mr-3"></i> Follower Focused Accounts
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <div class="glass p-6 rounded-2xl flex flex-col hover:bg-white/10 transition border-t-4 border-yellow-400">
+                        <i class="fas fa-user-plus text-3xl text-blue-400 mb-3"></i>
+                        <h4 class="text-lg font-bold mb-2">Micro Followers (1K - 5K)</h4>
+                        <p class="text-gray-400 text-sm flex-grow">Basic account with a small, engaged following for quick influence.</p>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-xl font-extrabold text-yellow-400">From $AA</span>
+                            <button onclick="orderNow('Follower Account: 1K-5K', 'From $AA')" class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-bold hover:bg-blue-600">Buy</button>
+                        </div>
+                    </div>
+
+                    <div class="glass p-6 rounded-2xl flex flex-col hover:bg-white/10 transition border-t-4 border-yellow-400">
+                        <i class="fas fa-user-friends text-3xl text-blue-400 mb-3"></i>
+                        <h4 class="text-lg font-bold mb-2">Standard Followers (5K - 15K)</h4>
+                        <p class="text-gray-400 text-sm flex-grow">Suitable for product promotion and gaining initial brand credibility.</p>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-xl font-extrabold text-yellow-400">From $BB</span>
+                            <button onclick="orderNow('Follower Account: 5K-15K', 'From $BB')" class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-bold hover:bg-blue-600">Buy</button>
+                        </div>
+                    </div>
+                    
+                    <div class="glass p-6 rounded-2xl flex flex-col hover:bg-white/10 transition border-t-4 border-yellow-400">
+                        <i class="fas fa-users-cog text-3xl text-blue-400 mb-3"></i>
+                        <h4 class="text-lg font-bold mb-2">Pro Followers (15K - 50K)</h4>
+                        <p class="text-gray-400 text-sm flex-grow">Large, active follower base for high reach and immediate impact marketing.</p>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-xl font-extrabold text-yellow-400">From $CC</span>
+                            <button onclick="orderNow('Follower Account: 15K-50K', 'From $CC')" class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-bold hover:bg-blue-600">Buy</button>
+                        </div>
+                    </div>
+
+                    <div class="glass p-6 rounded-2xl flex flex-col hover:bg-white/10 transition border-t-4 border-yellow-400">
+                        <i class="fas fa-bullhorn text-3xl text-blue-400 mb-3"></i>
+                        <h4 class="text-lg font-bold mb-2">Enterprise Followers (50K+ / Custom)</h4>
+                        <p class="text-gray-400 text-sm flex-grow">Customized acquisition for massive following needs. Ideal for enterprises.</p>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-xl font-extrabold text-yellow-400">Request Quote</span>
+                            <button onclick="orderNow('Follower Account: 50K+ Custom', 'Quote')" class="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold hover:bg-red-600">Quote</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+<section id="services" class="container mx-auto px-6 py-16 section-gradient">
+            <h2 id="services-heading" class="text-3xl font-bold text-center mb-10 gradient-heading">Professional Snapchat Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <div class="glass p-8 rounded-2xl flex flex-col hover:bg-white/10 transition border-t-4 border-blue-500">
+                    <i class="fas fa-level-up-alt text-4xl text-blue-500 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Snap Score Boosting Packages</h3>
+                    <p class="text-gray-400 mb-4 text-sm">Boost your existing account score securely and quickly. Choose the package that suits you.</p>
+                    
+                    <ul class="space-y-3 mb-6 text-sm flex-grow">
+                        <li class="flex justify-between items-center bg-white/5 p-2 rounded-lg">
+                            <span>🚀 10,000 Score Boost</span> <span class="font-bold text-yellow-400">$10</span>
+                        </li>
+                        <li class="flex justify-between items-center bg-white/5 p-2 rounded-lg">
+                            <span>🔥 50,000 Score Boost</span> <span class="font-bold text-yellow-400">$45</span>
+                        </li>
+                        <li class="flex justify-between items-center bg-white/5 p-2 rounded-lg">
+                            <span>⭐ 100,000 Score Boost</span> <span class="font-bold text-yellow-400">$85</span>
+                        </li>
+                    </ul>
+
+                    <button onclick="orderNow('Score Boosting Service', 'Check Packages')" class="bg-blue-500 text-white px-4 py-2 rounded-full font-bold hover:bg-blue-600 mt-auto"><i class="fab fa-whatsapp"></i> Select Package</button>
+                </div>
+
+                <div class="glass p-8 rounded-2xl flex flex-col hover:bg-white/10 transition border-t-4 border-purple-500">
+                    <i class="fas fa-camera-retro text-4xl text-purple-500 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Custom Snapchat AR Lens Creation</h3>
+                    <p class="text-gray-400 mb-4 text-sm flex-grow">Get a unique, professional AR Lens for your brand, event, or personal profile using Lens Studio.</p>
+                    
+                    <ul class="space-y-3 mb-6 text-sm">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle mr-3 text-green-400"></i> Custom 2D/3D Asset Integration
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle mr-3 text-green-400"></i> Full QA and Snapchat Submission
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle mr-3 text-green-400"></i> Marketing Link and Snapcode Provided
+                        </li>
+                    </ul>
+
+                    <button onclick="orderNow('AR Lens Creation', 'Get Quote')" class="bg-purple-500 text-white px-4 py-2 rounded-full font-bold hover:bg-purple-600 mt-auto"><i class="fab fa-whatsapp"></i> Get Custom Quote</button>
+                </div>
+            </div>
+        </section>
+        <section class="container mx-auto px-6 py-16 text-center section-gradient">
+            <div class="glass p-10 rounded-2xl">
+                <h2 id="cta-heading" class="text-3xl font-bold mb-4 gradient-heading">Ready to Boost Your Presence?</h2>
+                <p id="cta-desc" class="text-xl text-gray-300 mb-6">Contact us now to discuss your needs or place an order directly via WhatsApp.</p>
+                <a href="https://wa.me/923431390157" target="_blank" class="inline-block bg-green-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-green-600 transition transform shadow-lg">
+                    <i class="fab fa-whatsapp mr-2"></i> Chat on WhatsApp
+                </a>
+            </div>
+        </section>
+        
+    </main>
+
+    <footer class="glass-nav py-10 mt-16 border-t border-white/10">
+        <div class="container mx-auto px-6">
+            <div class="pt-8 mt-8 border-t border-white/10 text-center text-gray-500 text-sm">
+                <p>Copyright © 2024 SnapMarket. All Rights Reserved.</p>
+                <p class="text-xs mt-1">Disclaimer: We are not affiliated with Snapchat Inc. or Snap Inc.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // WhatsApp Order Logic (Updated number: +923431390157)
+        function orderNow(item, price) {
+            const phoneNumber = "923431390157";
+            const message = `Hello, I want to order this:\n\n📦 *Item/Service:* ${item}\n💰 *Price:* ${price}\n\nPlease share payment details.`;
+            
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        // Language Data (Translations for this specific page)
+        const translations = {
+            en: {
+                // Nav
+                navHome: 'Home', navProducts: 'Products & Services', navAchieve: 'Achievement', navContact: 'Contact',
+                // Hero
+                productsTitle: 'Browse Our <span class="text-yellow-400">Premium Offerings</span>',
+                productsDesc: 'High-score accounts, boosting packages, and custom AR Lens development—everything you need for Snapchat success.',
+                viewAccountsBtn: 'View Accounts',
+                // Sections
+                accountsHeading: 'Snapchat Accounts for Sale',
+                servicesHeading: 'Professional Snapchat Services',
+                ctaHeading: 'Ready to Boost Your Presence?',
+                ctaDesc: 'Contact us now to discuss your needs or place an order directly via WhatsApp.',
+                // Direction & Font
+                dir: 'ltr',
+                fontClass: ''
+            },
+            ur: {
+                // Nav
+                navHome: 'ہوم', navProducts: 'مصنوعات و خدمات', navAchieve: 'کامیابیاں', navContact: 'رابطہ',
+                // Hero
+                productsTitle: 'ہماری <span class="text-yellow-400">پریمیم پیشکشیں</span> دیکھیں',
+                productsDesc: 'ہائی اسکور اکاؤنٹس، بوسٹنگ پیکیجز، اور کسٹم AR لینس کی ترقی—سنیپ چیٹ پر کامیابی کے لیے سب کچھ۔',
+                viewAccountsBtn: 'اکاؤنٹس دیکھیں',
+                // Sections
+                accountsHeading: 'فروخت کے لیے سنیپ چیٹ اکاؤنٹس',
+                servicesHeading: 'پیشہ ورانہ سنیپ چیٹ خدمات',
+                ctaHeading: 'اپنی موجودگی کو فروغ دینے کے لیے تیار ہیں؟',
+                ctaDesc: 'اپنی ضروریات پر بات کرنے یا واٹس ایپ کے ذریعے براہ راست آرڈر دینے کے لیے ابھی ہم سے رابطہ کریں۔',
+                // Direction & Font
+                dir: 'rtl',
+                fontClass: 'font-urdu'
+            },
+            ar: {
+                // Nav
+                navHome: 'الرئيسية', navProducts: 'المنتجات والخدمات', navAchieve: 'الإنجازات', navContact: 'اتصل بنا',
+                // Hero
+                productsTitle: 'تصفح <span class="text-yellow-400">عروضنا المميزة</span>',
+                productsDesc: 'حسابات عالية النقاط، باقات تعزيز، وتطوير عدسات الواقع المعزز (AR) المخصصة—كل ما تحتاجه لنجاحك في سناب شات.',
+                viewAccountsBtn: 'عرض الحسابات',
+                // Sections
+                accountsHeading: 'حسابات سناب شات للبيع',
+                servicesHeading: 'خدمات سناب شات الاحترافية',
+                ctaHeading: 'هل أنت مستعد لتعزيز تواجدك؟',
+                ctaDesc: 'تواصل معنا الآن لمناقشة احتياجاتك أو لتقديم طلبك مباشرة عبر الواتساب.',
+                // Direction & Font
+                dir: 'rtl',
+                fontClass: 'font-arabic'
+            },
+            fr: {
+                // Nav
+                navHome: 'Accueil', navProducts: 'Produits & Services', navAchieve: 'Réalisations', navContact: 'Contact',
+                // Hero
+                productsTitle: 'Découvrez nos <span class="text-yellow-400">Offres Premium</span>',
+                productsDesc: 'Comptes à score élevé, forfaits de boosting et développement de Lenses AR personnalisées—tout pour réussir sur Snapchat.',
+                viewAccountsBtn: 'Voir les comptes',
+                // Sections
+                accountsHeading: 'Comptes Snapchat à Vendre',
+                servicesHeading: 'Services Snapchat Professionnels',
+                ctaHeading: 'Prêt à booster votre présence?',
+                ctaDesc: 'Contactez-nous maintenant pour discuter de vos besoins ou passer une commande directement via WhatsApp.',
+                // Direction & Font
+                dir: 'ltr',
+                fontClass: ''
+            },
+            es: {
+                // Nav
+                navHome: 'Inicio', navProducts: 'Productos y Servicios', navAchieve: 'Logros', navContact: 'Contacto',
+                // Hero
+                productsTitle: 'Explora Nuestras <span class="text-yellow-400">Ofertas Premium</span>',
+                productsDesc: 'Cuentas de alta puntuación, paquetes de boosting y desarrollo de lentes AR personalizados—todo lo que necesitas para el éxito en Snapchat.',
+                viewAccountsBtn: 'Ver Cuentas',
+                // Sections
+                accountsHeading: 'Cuentas de Snapchat en Venta',
+                servicesHeading: 'Servicios Profesionales de Snapchat',
+                ctaHeading: '¿Listo para impulsar tu presencia?',
+                ctaDesc: 'Contáctanos ahora para discutir tus necesidades o realizar un pedido directamente a través de WhatsApp.',
+                // Direction & Font
+                dir: 'ltr',
+                fontClass: ''
+            },
+            de: {
+                // Nav
+                navHome: 'Startseite', navProducts: 'Produkte & Dienstleistungen', navAchieve: 'Erfolge', navContact: 'Kontakt',
+                // Hero
+                productsTitle: 'Entdecken Sie Unsere <span class="text-yellow-400">Premium-Angebote</span>',
+                productsDesc: 'High-Score-Konten, Boosting-Pakete und kundenspezifische AR-Linsen-Entwicklung – alles, was Sie für Ihren Snapchat-Erfolg benötigen.',
+                viewAccountsBtn: 'Konten anzeigen',
+                // Sections
+                accountsHeading: 'Snapchat-Konten zum Verkauf',
+                servicesHeading: 'Professionelle Snapchat-Dienstleistungen',
+                ctaHeading: 'Bereit, Ihre Präsenz zu steigern?',
+                ctaDesc: 'Kontaktieren Sie uns jetzt, um Ihre Bedürfnisse zu besprechen oder direkt über WhatsApp zu bestellen.',
+                // Direction & Font
+                dir: 'ltr',
+                fontClass: ''
+            },
+            ph: {
+                // Nav
+                navHome: 'Home', navProducts: 'Mga Produkto at Serbisyo', navAchieve: 'Mga Tagumpay', navContact: 'Makipag-ugnayan',
+                // Hero
+                productsTitle: 'Tingnan ang Aming <span class="text-yellow-400">Mga Premium na Alok</span>',
+                productsDesc: 'Mga high-score account, boosting packages, at custom AR Lens development—lahat ng kailangan mo para sa tagumpay sa Snapchat.',
+                viewAccountsBtn: 'Tingnan ang mga Account',
+                // Sections
+                accountsHeading: 'Snapchat Accounts na Binebenta',
+                servicesHeading: 'Propesyonal na Serbisyo ng Snapchat',
+                ctaHeading: 'Handa na bang I-boost ang Iyong Presence?',
+                ctaDesc: 'Makipag-ugnayan sa amin ngayon upang talakayin ang iyong mga pangangailangan o mag-order nang direkta sa pamamagitan ng WhatsApp.',
+                // Direction & Font
+                dir: 'ltr',
+                fontClass: ''
+            }
+        };
+
+        // Language Switcher Function
+        function changeLang(lang) {
+            const t = translations[lang] || translations['en'];
+            
+            // Update Navigation Links
+            document.querySelector('#nav-links a[href="index.html"]').innerText = t.navHome;
+            document.querySelector('#nav-links a[href="#"]').innerText = t.navProducts;
+            document.querySelector('#nav-links a[href="index.html#achievement"]').innerText = t.navAchieve;
+            document.querySelector('#nav-links a[href="index.html#contact"]').innerText = t.navContact;
+
+            // Update Hero
+            document.getElementById('products-title').innerHTML = t.productsTitle;
+            document.getElementById('products-desc').innerText = t.productsDesc;
+            document.getElementById('view-accounts-btn').innerHTML = `${t.viewAccountsBtn} <i class="fas fa-arrow-down ml-2"></i>`;
+
+            // Update Section Titles
+            document.getElementById('accounts-heading').innerText = t.accountsHeading;
+            document.getElementById('services-heading').innerText = t.servicesHeading;
+            document.getElementById('cta-heading').innerText = t.ctaHeading;
+            document.getElementById('cta-desc').innerText = t.ctaDesc;
+            document.getElementById('current-lang').innerText = lang.toUpperCase();
+
+            // Handle Direction (RTL/LTR) & Font
+            const body = document.getElementById('body-container');
+            body.style.direction = t.dir;
+            
+            // Remove existing language classes and add new one
+            body.classList.remove('font-urdu', 'font-arabic');
+            if (t.fontClass) {
+                body.classList.add(t.fontClass);
+            }
+        }
+    </script>
+</body>
+</html>

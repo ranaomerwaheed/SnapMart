@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnapMarket - Advanced Admin Console</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0b1424; /* Deep Blue Background */
+            color: #e2e8f0;
+        }
+        .sidebar {
+            background-color: #10192e; /* Darker sidebar */
+            border-right: 1px solid #2d3748;
+        }
+        .main-header {
+            background-color: #1a2334;
+        }
+        .metric-card {
+            background-color: #1a2334;
+            border-radius: 0.75rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #2d3748;
+        }
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+        .accent-color {
+            color: #FFD700; /* Gold/Yellow Accent */
+        }
+        .focus-ring {
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.5);
+        }
+        .active-link {
+            background-color: #2d3748;
+            border-left: 4px solid #FFD700;
+            color: #FFD700;
+        }
+        .table-row-hover:hover {
+            background-color: #1f2a40;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+
+    <aside class="sidebar w-72 p-6 flex flex-col sticky top-0 h-screen">
+        <div class="text-3xl font-extrabold mb-12 text-center">
+            <i class="fab fa-snapchat accent-color mr-2"></i> SnapMarket <span class="text-sm block font-normal text-gray-400">Admin Console v2.1</span>
+        </div>
+        <nav class="flex-grow space-y-2">
+            <a href="#dashboard" class="flex items-center space-x-4 p-3 rounded-lg active-link transition duration-200" data-section="dashboard">
+                <i class="fas fa-home fa-lg"></i>
+                <span class="font-semibold">Dashboard Summary</span>
+            </a>
+            <a href="#accounts" class="flex items-center space-x-4 p-3 rounded-lg hover:bg-gray-700 transition duration-200" data-section="accounts">
+                <i class="fas fa-users-cog fa-lg"></i>
+                <span class="font-semibold">Account Inventory</span>
+            </a>
+            <a href="#services" class="flex items-center space-x-4 p-3 rounded-lg hover:bg-gray-700 transition duration-200" data-section="services">
+                <i class="fas fa-rocket fa-lg"></i>
+                <span class="font-semibold">Boosting & Tools</span>
+            </a>
+            <a href="#transactions" class="flex items-center space-x-4 p-3 rounded-lg hover:bg-gray-700 transition duration-200" data-section="transactions">
+                <i class="fas fa-receipt fa-lg"></i>
+                <span class="font-semibold">Transactions</span>
+            </a>
+            <a href="#system" class="flex items-center space-x-4 p-3 rounded-lg hover:bg-gray-700 transition duration-200" data-section="system">
+                <i class="fas fa-cogs fa-lg"></i>
+                <span class="font-semibold">System Settings</span>
+            </a>
+        </nav>
+        <div class="mt-8 pt-4 border-t border-gray-700">
+            <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-red-400 hover:bg-red-700 hover:text-white transition duration-200">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Sign Out</span>
+            </a>
+        </div>
+    </aside>
+
+    <main class="flex-1 p-10 overflow-y-auto">
+
+        <header class="main-header p-4 rounded-xl shadow-lg mb-8 flex justify-between items-center sticky top-0 z-10">
+            <h1 class="text-3xl font-bold">
+                <span id="current-title" class="accent-color">Dashboard Summary</span>
+            </h1>
+            <div class="flex items-center space-x-4">
+                <button class="text-gray-400 hover:text-white"><i class="fas fa-bell fa-lg"></i></button>
+                <div class="h-10 w-10 bg-yellow-600 rounded-full flex items-center justify-center text-black font-bold">A</div>
+                <span class="hidden md:inline">Admin User</span>
+            </div>
+        </header>
+
+        <section id="content-dashboard" class="content-section">
+            <h2 class="text-2xl font-bold mb-6 border-b border-gray-700 pb-2">Key Metrics</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+                <div class="metric-card p-6 shadow-xl">
+                    <div class="flex justify-between items-start">
+                        <i class="fas fa-dollar-sign text-4xl text-green-400"></i>
+                        <span class="text-xs font-medium bg-green-900/50 text-green-300 px-2 py-1 rounded-full">+12.5%</span>
+                    </div>
+                    <p class="text-4xl font-extrabold mt-4">$450.00</p>
+                    <p class="text-gray-400 mt-1">Today's Revenue</p>
+                </div>
+
+                <div class="metric-card p-6 shadow-xl">
+                    <div class="flex justify-between items-start">
+                        <i class="fas fa-users-cog text-4xl accent-color"></i>
+                        <span class="text-xs font-medium bg-yellow-900/50 text-yellow-300 px-2 py-1 rounded-full">32 In Stock</span>
+                    </div>
+                    <p class="text-4xl font-extrabold mt-4">258</p>
+                    <p class="text-gray-400 mt-1">Accounts Available</p>
+                </div>
+
+                <div class="metric-card p-6 shadow-xl">
+                    <div class="flex justify-between items-start">
+                        <i class="fas fa-shopping-cart text-4xl text-blue-400"></i>
+                        <span class="text-xs font-medium bg-red-900/50 text-red-300 px-2 py-1 rounded-full">3 Failed</span>
+                    </div>
+                    <p class="text-4xl font-extrabold mt-4">1,890</p>
+                    <p class="text-gray-400 mt-1">Total Orders Processed</p>
+                </div>
+
+                <div class="metric-card p-6 shadow-xl">
+                    <div class="flex justify-between items-start">
+                        <i class="fas fa-download text-4xl text-purple-400"></i>
+                        <span class="text-xs font-medium bg-purple-900/50 text-purple-300 px-2 py-1 rounded-full">+10K/Day</span>
+                    </div>
+                    <p class="text-4xl font-extrabold mt-4">85,342</p>
+                    <p class="text-gray-400 mt-1">API Requests (Lifetime)</p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 bg-gray-800 p-6 rounded-xl shadow-xl">
+                    <h3 class="text-xl font-semibold mb-4">Last 7 Days Sales Trend </h3>
+                    <p class="text-gray-500 h-64 flex items-center justify-center">-- Chart Library Integration Required Here (e.g., Chart.js) --</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-xl shadow-xl">
+                    <h3 class="text-xl font-semibold mb-4">Top Selling Items</h3>
+                    <ul class="space-y-3">
+                        <li class="flex justify-between border-b border-gray-700 pb-2"><span>5M+ Score Account</span> <span class="font-bold text-yellow-400">x40</span></li>
+                        <li class="flex justify-between border-b border-gray-700 pb-2"><span>10K Followers Boost</span> <span class="font-bold text-yellow-400">x65</span></li>
+                        <li class="flex justify-between border-b border-gray-700 pb-2"><span>AR Lens Basic Pack</span> <span class="font-bold text-yellow-400">x15</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="content-accounts" class="content-section hidden">
+            <h2 class="text-2xl font-bold mb-6 border-b border-gray-700 pb-2">Account Inventory (CRUD Operations)</h2>
+            <div class="bg-gray-800 p-6 rounded-xl shadow-xl">
+                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition mb-4">
+                    <i class="fas fa-plus mr-2"></i> Add New Account
+                </button>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-700">
+                        <thead class="bg-gray-700">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Account ID</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Score Range</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Price ($)</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Status</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-800">
+                            <tr class="table-row-hover">
+                                <td class="px-6 py-4 whitespace-nowrap">ACNT-0010</td>
+                                <td class="px-6 py-4 whitespace-nowrap">5M+</td>
+                                <td class="px-6 py-4 whitespace-nowrap">99.99</td>
+                                <td class="px-6 py-4 whitespace-nowrap"><span class="bg-green-600 text-white px-3 py-1 text-xs rounded-full">Available</span></td>
+                                <td class="px-6 py-4 whitespace-nowrap space-x-2">
+                                    <button class="text-blue-400 hover:text-blue-500"><i class="fas fa-pencil-alt"></i> Edit</button>
+                                    <button class="text-red-400 hover:text-red-500"><i class="fas fa-trash"></i> Delete</button>
+                                </td>
+                            </tr>
+                            <tr class="table-row-hover">
+                                <td class="px-6 py-4 whitespace-nowrap">ACNT-0011</td>
+                                <td class="px-6 py-4 whitespace-nowrap">1M-5M</td>
+                                <td class="px-6 py-4 whitespace-nowrap">49.99</td>
+                                <td class="px-6 py-4 whitespace-nowrap"><span class="bg-yellow-600 text-black px-3 py-1 text-xs rounded-full">Processing</span></td>
+                                <td class="px-6 py-4 whitespace-nowrap space-x-2">
+                                    <button class="text-blue-400 hover:text-blue-500"><i class="fas fa-pencil-alt"></i> Edit</button>
+                                    <button class="text-red-400 hover:text-red-500"><i class="fas fa-trash"></i> Delete</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        
+        <section id="content-system" class="content-section hidden">
+            <h2 class="text-2xl font-bold mb-6 border-b border-gray-700 pb-2">System & Integrations</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <div class="bg-gray-800 p-6 rounded-xl shadow-xl">
+                    <h3 class="text-xl font-semibold mb-4 accent-color"><i class="fas fa-key mr-2"></i> Story Downloader API</h3>
+                    <p class="text-gray-400 mb-4">Manage the external API key used for the Story Download service.</p>
+                    
+                    <label for="api-endpoint" class="block text-sm font-medium text-gray-300 mb-1">API Endpoint URL</label>
+                    <input type="text" id="api-endpoint" class="w-full bg-gray-900 border border-gray-700 p-2 rounded focus-ring mb-4" value="https://api.yourdownloader.com/v1/snap-story">
+                    
+                    <label for="api-key" class="block text-sm font-medium text-gray-300 mb-1">Authorization/Secret Key</label>
+                    <input type="password" id="api-key" class="w-full bg-gray-900 border border-gray-700 p-2 rounded focus-ring mb-6" value="••••••••••••••••••••••••" placeholder="Enter new API Key">
+                    
+                    <button class="bg-yellow-600 hover:bg-yellow-700 text-black font-bold w-full py-2 rounded transition"><i class="fas fa-save mr-2"></i> Save API Settings</button>
+                </div>
+                
+                <div class="bg-gray-800 p-6 rounded-xl shadow-xl">
+                    <h3 class="text-xl font-semibold mb-4 accent-color"><i class="fas fa-calendar-check mr-2"></i> Policy Last Update</h3>
+                    <p class="text-gray-400 mb-4">Changing these dates updates the footer text on the main site.</p>
+                    
+                    <label for="terms-date-sys" class="block text-sm font-medium text-gray-300 mb-1">Terms of Service Date</label>
+                    <input type="date" id="terms-date-sys" class="w-full bg-gray-900 border border-gray-700 p-2 rounded focus-ring mb-4" value="2025-11-26">
+                    
+                    <label for="refund-date-sys" class="block text-sm font-medium text-gray-300 mb-1">Refund Policy Date</label>
+                    <input type="date" id="refund-date-sys" class="w-full bg-gray-900 border border-gray-700 p-2 rounded focus-ring mb-6" value="2025-11-26">
+
+                    <button class="bg-yellow-600 hover:bg-yellow-700 text-black font-bold w-full py-2 rounded transition"><i class="fas fa-sync mr-2"></i> Update Site Policies</button>
+                </div>
+            </div>
+        </section>
+        
+        </main>
+
+    <script>
+        // Simple JavaScript to handle tab switching (Front-End)
+        document.addEventListener('DOMContentLoaded', () => {
+            const sidebarLinks = document.querySelectorAll('.sidebar a[data-section]');
+            const contentSections = document.querySelectorAll('.content-section');
+            const titleElement = document.getElementById('current-title');
+
+            const switchSection = (sectionId) => {
+                // Hide all content sections
+                contentSections.forEach(section => {
+                    section.classList.add('hidden');
+                });
+
+                // Show the selected section
+                const targetSection = document.getElementById(`content-${sectionId}`);
+                if (targetSection) {
+                    targetSection.classList.remove('hidden');
+                    
+                    // Update the title
+                    titleElement.innerText = targetSection.querySelector('h2').innerText.split('(')[0].trim();
+                }
+
+                // Update active link in sidebar
+                sidebarLinks.forEach(link => {
+                    link.classList.remove('active-link');
+                    if (link.getAttribute('data-section') === sectionId) {
+                        link.classList.add('active-link');
+                    }
+                });
+            };
+
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const sectionId = link.getAttribute('data-section');
+                    switchSection(sectionId);
+                    window.location.hash = sectionId; // Update URL hash
+                });
+            });
+
+            // Initial load based on URL hash or default to dashboard
+            const initialHash = window.location.hash ? window.location.hash.substring(1) : 'dashboard';
+            switchSection(initialHash);
+        });
+    </script>
+</body>
+</html>

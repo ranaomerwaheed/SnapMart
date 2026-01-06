@@ -139,31 +139,47 @@ app.get('/api/public/accounts', async (req, res) => {
 
 // ... (Server listen code remains same)
 
+// ... (اوپر کا سارا کوڈ ویسے ہی رہنے دیں، صرف آخر والا حصہ تبدیل کریں)
 
 // 5. SERVER START
-app.listen(PORT, () => {
-    console.log(Server is running on port ${PORT});
+app.listen(PORT, async () => {
+    console.log(`Server is running on port ${PORT}`);
     
-    // You must run a script to create your first admin user in MongoDB Atlas manually
-    // or by running a script like this (but only once):
-    // createInitialAdminUser(); 
+    // یہ فنکشن چلائیں تاکہ آپ کا یوزر نیم اور پاسورڈ بن جائے
+    await createInitialAdminUser(); 
 });
 
-// Helper function to create initial admin (Run ONLY ONCE locally or via a manual script)
-/*
+// Admin بنانے کا فنکشن
 async function createInitialAdminUser() {
-    const initialUsername = "superadmin";
-    const initialPassword = "your_strong_default_password_123"; 
+    // ⬇️ ⬇️ اپنی مرضی کا یوزر نیم اور پاسورڈ یہاں لکھیں ⬇️ ⬇️
+    const initialUsername = "myadmin";   // آپ کا یوزر نیم
+    const initialPassword = "mypassword123"; // آپ کا پاسورڈ
     
     try {
+        // چیک کریں کہ پہلے سے کوئی ایڈمن تو نہیں؟
         const count = await Admin.countDocuments();
+        
         if (count === 0) {
+            // پاسورڈ کو محفوظ (Hash) کریں
             const hashedPassword = await bcrypt.hash(initialPassword, 10);
-            await new Admin({ username: initialUsername, password: hashedPassword }).save();
-            console.log(\n!!! Initial Admin User created: ${initialUsername} / ${initialPassword} !!!\n);
+            
+            // نیا ایڈمن محفوظ کریں
+            await new Admin({ 
+                username: initialUsername, 
+                password: hashedPassword 
+            }).save();
+            
+            console.log("\n=============================================");
+            console.log(" MUBARAK HO! ADMIN ACCOUNT BAN GYA HAI ");
+            console.log(` Username: ${initialUsername}`);
+            console.log(` Password: ${initialPassword}`);
+            console.log("=============================================\n");
+        } else {
+            console.log("Admin account already exists. No need to create new.");
         }
     } catch (e) {
-        console.error("Error creating initial admin:", e);
+        console.error("Error creating admin:", e);
     }
 }
+
 */

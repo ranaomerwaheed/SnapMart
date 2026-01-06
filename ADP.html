@@ -43,6 +43,23 @@
         .table-row-hover:hover {
             background-color: #1f2a40;
         }
+        /* ... existing styles ... */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 50;
+        left: 0; top: 0;
+        width: 100%; height: 100%;
+        background-color: rgba(0,0,0,0.7);
+        justify-content: center; align-items: center;
+    }
+    .modal-content {
+        background-color: #1a2334;
+        padding: 2rem;
+        border-radius: 10px;
+        width: 90%; max-width: 500px;
+        border: 1px solid #FFD700;
+    }
     </style>
 </head>
 <body class="flex min-h-screen">
@@ -217,7 +234,58 @@
                 </div>
             </div>
         </section>
-        
+        <section id="content-accounts" class="content-section hidden">
+    <h2 class="text-2xl font-bold mb-6 border-b border-gray-700 pb-2">Account Inventory</h2>
+    
+    <button onclick="openModal()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition mb-4">
+        <i class="fas fa-plus mr-2"></i> Add New Account
+    </button>
+
+    <div class="bg-gray-800 p-6 rounded-xl shadow-xl overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-700">
+            <thead class="bg-gray-700">
+                <tr>
+                    <th class="px-4 py-2 text-left text-gray-300">Username</th>
+                    <th class="px-4 py-2 text-left text-gray-300">Score</th>
+                    <th class="px-4 py-2 text-left text-gray-300">Price</th>
+                    <th class="px-4 py-2 text-left text-gray-300">Status</th>
+                </tr>
+            </thead>
+            <tbody id="accountTableBody" class="divide-y divide-gray-800 text-gray-300">
+                </tbody>
+        </table>
+    </div>
+</section>
+
+<div id="addAccountModal" class="modal">
+    <div class="modal-content">
+        <h3 class="text-2xl font-bold mb-4 text-yellow-400">Add New Account</h3>
+        <form id="addAccountForm">
+            <div class="mb-4">
+                <label class="block text-sm mb-1">Snap Username</label>
+                <input type="text" id="newUsername" required class="w-full p-2 rounded bg-gray-900 border border-gray-600 text-white">
+            </div>
+            <div class="mb-4">
+                <label class="block text-sm mb-1">Password (Encrypted on Server)</label>
+                <input type="text" id="newPassword" required class="w-full p-2 rounded bg-gray-900 border border-gray-600 text-white">
+            </div>
+            <div class="flex gap-4 mb-4">
+                <div class="w-1/2">
+                    <label class="block text-sm mb-1">Score</label>
+                    <input type="text" id="newScore" placeholder="e.g. 50k" required class="w-full p-2 rounded bg-gray-900 border border-gray-600 text-white">
+                </div>
+                <div class="w-1/2">
+                    <label class="block text-sm mb-1">Price ($)</label>
+                    <input type="number" id="newPrice" required class="w-full p-2 rounded bg-gray-900 border border-gray-600 text-white">
+                </div>
+            </div>
+            <div class="flex justify-end gap-2">
+                <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-600 rounded text-white hover:bg-gray-500">Cancel</button>
+                <button type="submit" class="px-4 py-2 bg-yellow-500 rounded text-black font-bold hover:bg-yellow-400">Save Account</button>
+            </div>
+        </form>
+    </div>
+</div>
         </main>
 
     <script>
@@ -363,5 +431,132 @@
             });
         });
     </script>
+    <script>
+    const API_URL = 'http://localhost:5000'; // Update with live URL if needed
+
+    // --- 1. SECURITY CHECK (Redirect if no token) ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const token = localStorage.getItem('adminToken');
+        if (!token) {
+            window.location.href = 'ALP.html'; // Kick user back to login
+        } else {
+            loadAccountInventory(); // Load data if logged in
+        }
+    });
+
+    // --- 2. LOGOUT FUNCTION ---
+    document.getElementById('signOutBtn').addEventListener('click', () => {
+        localStorage.removeItem('adminToken');
+        window.location.href = 'ALP.html';
+    });
+
+    // --- 3. LOAD DATA ---
+    async function loadAccountInventory() {
+        const token = localStorage.getItem('adminToken');
+        const res = await fetch(`${API_URL}/api/admin/accounts`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const accounts = await res.json();
+        
+        const tbody = document.getElementById('accountTableBody');
+        tbody.innerHTML = '';
+        accounts.forEach(acc => {
+            tbody.innerHTML += `
+                <tr>
+                    <td class="px-4 py-2">${acc.snapUsername}</td>
+                    <td class="px-4 py-2">${acc.score}</td>
+                    <td class="px-4 py-2">$${acc.price}</td>
+                    <td class="px-4 py-2"><span class="bg-green-600 px-2 rounded text-xs">${acc.status}</span></td>
+                </tr>
+            `;
+        });
+    }
+
+    // --- 4. ADD NEW ACCOUNT LOGIC ---
+    function openModal() { document.getElementById('addAccountModal').style.display = 'flex'; }
+    function closeModal() { document.getElementById('addAccountModal').style.display = 'none'; }
+
+    document.getElementById('addAccountForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const token = localStorage.getItem('adminToken');
+        
+        const bodyData = {
+            snapUsername: document.getElementById('newUsername').value,
+            snapPassword: document.getElementById('newPassword').value,
+            score: document.getElementById('newScore').value,
+            price: document.getElementById('newPrice').value
+        };
+
+        const res = await fetch(`${API_URL}/api/admin/accounts/add`, {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(bodyData)
+        });
+
+        if(res.ok) {
+            alert('Account Added to Website!');
+            closeModal();
+            loadAccountInventory(); // Refresh table
+            e.target.reset();
+        } else {
+            alert('Error adding account');
+        }
+    });
+    
+    // ... (Keep existing switchSection logic) ...
+</script>
+4. product.html (Website Display Update)
+یہاں ہم کوڈ شامل کریں گے جو سرور سے "Available" اکاؤنٹس اٹھا کر خودکار طریقے سے کارڈز بنائے گا۔
+
+Code snippet
+
+<div id="dynamic-accounts-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    </div>
+
+<script>
+    const API_URL = 'http://localhost:5000'; // Update to live URL
+
+    // Fetch and Display Accounts automatically
+    async function fetchPublicAccounts() {
+        try {
+            const response = await fetch(`${API_URL}/api/public/accounts`);
+            const accounts = await response.json();
+            
+            const container = document.getElementById('dynamic-accounts-container');
+            // Clear hardcoded items if you only want dynamic ones
+            container.innerHTML = ''; 
+
+            accounts.forEach(acc => {
+                const cardHTML = `
+                <div class="glass p-6 rounded-2xl flex flex-col hover:bg-white/10 transition border-t-4 border-yellow-400 fade-in">
+                    <i class="fas fa-trophy text-3xl text-yellow-500 mb-3"></i>
+                    <h4 class="text-lg font-bold mb-2">${acc.snapUsername}</h4>
+                    <p class="text-gray-400 text-sm flex-grow">
+                       Score: <span class="text-white">${acc.score}</span><br>
+                       Status: <span class="text-green-400">Available Instant</span>
+                    </p>
+                    <div class="mt-4 flex justify-between items-center">
+                        <span class="text-xl font-extrabold text-yellow-400">$${acc.price}</span>
+                        <button onclick="orderNow('${acc.snapUsername} - Score: ${acc.score}', '$${acc.price}')" 
+                                class="bg-yellow-400 text-black px-3 py-1 rounded-full text-sm font-bold hover:bg-yellow-300">
+                            Buy Now
+                        </button>
+                    </div>
+                </div>
+                `;
+                container.innerHTML += cardHTML;
+            });
+
+        } catch (error) {
+            console.error('Error loading products:', error);
+        }
+    }
+
+    // Load on start
+    document.addEventListener('DOMContentLoaded', fetchPublicAccounts);
+</script>
 </body>
 </html>

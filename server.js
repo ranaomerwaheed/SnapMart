@@ -72,10 +72,13 @@ const protectAdminRoute = (req, res, next) => {
 };
 
 
+// ... (Previous imports and setup remain the same)
+
 // 4. API ROUTES
 
 // A. LOGIN ROUTE (Public)
 app.post('/api/admin/login', async (req, res) => {
+    // ... (Existing login code remains same)
     const { username, password } = req.body;
     try {
         const admin = await Admin.findOne({ username });
@@ -86,25 +89,22 @@ app.post('/api/admin/login', async (req, res) => {
 
         const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
         res.json({ message: 'Login successful!', token });
-        
     } catch (error) {
-        res.status(500).json({ message: 'Server error during login.' });
+        res.status(500).json({ message: 'Server error.' });
     }
 });
 
-// B. ADD NEW ACCOUNT ROUTE (Protected - Create)
+// B. ADD NEW ACCOUNT (Protected - Admin Only)
 app.post('/api/admin/accounts/add', protectAdminRoute, async (req, res) => {
-    // Only Admin can access this route due to protectAdminRoute middleware
     const { snapUsername, snapPassword, price, score } = req.body;
-    
     try {
         const newAccount = new Account({
             snapUsername,
             snapPasswordEncrypted: snapPassword, 
             price,
             score,
+            status: 'Available'
         });
-
         await newAccount.save();
         res.status(201).json({ message: 'Account added successfully!', account: newAccount });
     } catch (error) {
@@ -112,31 +112,32 @@ app.post('/api/admin/accounts/add', protectAdminRoute, async (req, res) => {
     }
 });
 
-// C. GET ALL ACCOUNTS ROUTE (Protected - Read)
+// C. GET ALL ACCOUNTS (Protected - For Admin Dashboard)
 app.get('/api/admin/accounts', protectAdminRoute, async (req, res) => {
     try {
-        // Fetch all accounts but EXCLUDE the encrypted password for the UI's security
-        const accounts = await Account.find().select('-snapPasswordEncrypted -__v');
+        const accounts = await Account.find(); // Admin sees everything
         res.json(accounts);
     } catch (error) {
         res.status(500).json({ message: 'Failed to fetch accounts.' });
     }
 });
 
-// D. UPDATE ACCOUNT ROUTE (Protected - Update)
-app.put('/api/admin/accounts/:id', protectAdminRoute, async (req, res) => {
+// *** NEW: PUBLIC ROUTE FOR WEBSITE (No Password Required) ***
+// This allows product.html to show available accounts securely
+app.get('/api/public/accounts', async (req, res) => {
     try {
-        const updatedProduct = await Account.findByIdAndUpdate(
-            req.params.id,
-            req.body, // Update fields sent in the request body
-            { new: true }
-        );
-        if (!updatedProduct) return res.status(404).json({ message: 'Account not found.' });
-        res.status(200).json({ message: 'Account updated successfully', data: updatedProduct });
+        // Only fetch accounts that are "Available" and hide the password
+        const accounts = await Account.find({ status: 'Available' }).select('-snapPasswordEncrypted -__v');
+        res.json(accounts);
     } catch (error) {
-        res.status(500).json({ message: 'Error updating account.', error: error.message });
+        res.status(500).json({ message: 'Failed to fetch public accounts.' });
     }
 });
+
+// D. UPDATE/DELETE ROUTES (Protected)
+// ... (Keep your update/delete routes here if you have them)
+
+// ... (Server listen code remains same)
 
 
 // 5. SERVER START
